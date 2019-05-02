@@ -1,0 +1,33 @@
+div#timing {
+    font-size: 25.5vw;
+}
+
+div#timing #note {
+    text-align: center;
+}
+
+body.stopped {
+    background-color: #ff0000;
+}
+
+body.started {
+    background-color: #00ff00;
+}
+
+div#setup input {
+    width: 25%;
+    height: 20%;
+    margin-top: 20%;
+    font-size: 8vw;
+}
+
+input#seconds {
+    margin-left: 25%;
+    float: left;
+}
+input#go {
+}
+
+.hidden {
+    display: none;
+}
