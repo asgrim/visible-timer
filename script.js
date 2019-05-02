@@ -10,8 +10,6 @@ var preTimer;
 var actualTimeRemaining;
 var timer;
 
-var noSleep = new NoSleep();
-
 function startTimer(preTime, actualTime) {
     setupWin.setAttribute('class', 'hidden');
     timingWin.setAttribute('class', '');
@@ -36,7 +34,6 @@ function startTimer(preTime, actualTime) {
                     setupWin.setAttribute('class', '');
                     timingWin.setAttribute('class', 'hidden');
                     body.setAttribute('class', 'stopped');
-                    noSleep.disable();
                 }
             }, 1000);
         }
@@ -44,7 +41,6 @@ function startTimer(preTime, actualTime) {
 }
 
 document.getElementById('go').onclick = function () {
-    document.documentElement.requestFullscreen();
-    noSleep.enable();
+    document.documentElement.webkitRequestFullscreen();
     startTimer(3, parseInt(secondsInput.value));
 };
