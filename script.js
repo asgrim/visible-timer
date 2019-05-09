@@ -10,6 +10,8 @@ var preTimer;
 var actualTimeRemaining;
 var timer;
 
+var noSleep = new NoSleep();
+
 const MIN_PRE_TIME = 3;
 const MAX_PRE_TIME = 7;
 
@@ -63,6 +65,7 @@ function startTimer(preTime, actualTime) {
 }
 
 document.getElementById('go').onclick = function () {
+    noSleep.enable();
     document.documentElement.webkitRequestFullscreen();
 
     startTimer(
