@@ -23,6 +23,9 @@ function startTimer(preTime, actualTime) {
 
         if (preTimerRemaining === 0) {
             clearInterval(preTimer);
+
+            new Audio('beep.mp3').play();
+
             noteText.innerText = actualTimeRemaining;
             body.setAttribute('class', 'started');
             timer = setInterval(function () {
