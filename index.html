@@ -15,12 +15,20 @@
 
     <div id="setup">
         <label for="seconds" class="hidden">Seconds</label>
-            <input id="seconds" type="number" value="10" />
+            <input id="seconds" type="number" value="150" />
 
         <input id="go" type="submit" value="Go" />
-    </div>
 
-    0842
+        <div class="defaultTimes">
+            <ul>
+                <li><a href="javascript:setTimeLimitTo(10);">10</a></li>
+                <li><a href="javascript:setTimeLimitTo(20);">20</a></li>
+                <li><a href="javascript:setTimeLimitTo(150);">150</a></li>
+            </ul>
+        </div>
+
+        <div class="version">revision: {{ site.github.build_revision }}</div>
+    </div>
 
 <!-- https://github.com/richtr/NoSleep.js -->
 <!--<script type="text/javascript" src="NoSleep.min.js"></script>-->

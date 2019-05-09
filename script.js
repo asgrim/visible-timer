@@ -23,6 +23,10 @@ function timerCompletedEvent()
     new Audio('beep.mp3').play();
 }
 
+function setTimeLimitTo(value) {
+    secondsInput.value = value;
+}
+
 function startTimer(preTime, actualTime) {
     setupWin.setAttribute('class', 'hidden');
     timingWin.setAttribute('class', '');

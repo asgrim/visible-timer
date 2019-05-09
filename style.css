@@ -31,3 +31,29 @@ input#go {
 .hidden {
     display: none;
 }
+
+div.defaultTimes {
+    margin-top: 1vw;
+    text-align: center;
+}
+div.defaultTimes ul {
+    display: inline-table;
+}
+div.defaultTimes ul li {
+    font-size: 4vw;
+    margin-right: 6vw;
+    display: inline;
+}
+div.defaultTimes ul li a {
+    padding: 0.5vw 1vw;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #960000;
+}
+
+
+div.version {
+    font-size: 1.5vw;
+    text-align: center;
+    color: rgb(255, 162, 162);
+}
