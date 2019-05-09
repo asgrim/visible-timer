@@ -2,12 +2,35 @@
     display: none;
 }
 
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
 body {
     &.stopped {
         background-color: #ff0000;
+
+        #note {
+            color: #ff0000;
+        }
     }
     &.started {
         background-color: #00ff00;
+
+        #note {
+            color: #00ff00;
+        }
+    }
+    &.paused {
+        background-color: #ff8000;
+
+        #note {
+            color: #000000;
+            animation: blinker 1s linear infinite;
+            display: block;
+        }
     }
 }
 

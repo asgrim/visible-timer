@@ -9,6 +9,7 @@ let preTimer;
 
 let actualTimeRemaining;
 let timer;
+let paused = false;
 
 const noSleep = new NoSleep();
 
@@ -27,6 +28,25 @@ function timerCompletedEvent()
 
 function setTimeLimitTo(value) {
     secondsInput.value = value;
+}
+
+function toggleTimer() {
+    // Can't pause the pre timer
+    if (preTimerRemaining > 0) {
+        return;
+    }
+
+    // Unpause by just restarting the timer with actual time remaining
+    if (paused) {
+        paused = false;
+        startTimer(3, actualTimeRemaining);
+        return;
+    }
+
+    // Pause by stopping timer, don't clear actualTimeRemaining though
+    clearInterval(timer);
+    body.setAttribute('class', 'paused');
+    paused = true;
 }
 
 function startTimer(preTime, actualTime) {
@@ -73,3 +93,4 @@ document.getElementById('go').onclick = function () {
         parseInt(secondsInput.value)
     );
 };
+document.getElementById('timing').onclick = toggleTimer;
