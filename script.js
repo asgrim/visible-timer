@@ -10,6 +10,16 @@ var preTimer;
 var actualTimeRemaining;
 var timer;
 
+function timerStartedEvent()
+{
+    new Audio('beep.mp3').play();
+}
+
+function timerCompletedEvent()
+{
+    new Audio('beep.mp3').play();
+}
+
 function startTimer(preTime, actualTime) {
     setupWin.setAttribute('class', 'hidden');
     timingWin.setAttribute('class', '');
@@ -24,7 +34,7 @@ function startTimer(preTime, actualTime) {
         if (preTimerRemaining === 0) {
             clearInterval(preTimer);
 
-            new Audio('beep.mp3').play();
+            timerStartedEvent();
 
             noteText.innerText = actualTimeRemaining;
             body.setAttribute('class', 'started');
@@ -37,6 +47,8 @@ function startTimer(preTime, actualTime) {
                     setupWin.setAttribute('class', '');
                     timingWin.setAttribute('class', 'hidden');
                     body.setAttribute('class', 'stopped');
+
+                    timerCompletedEvent();
                 }
             }, 1000);
         }
