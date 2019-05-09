@@ -1,16 +1,16 @@
-var body = document.getElementsByTagName('body')[0];
-var timingWin = document.getElementById('timing');
-var setupWin = document.getElementById('setup');
-var noteText = document.getElementById('note');
-var secondsInput = document.getElementById('seconds');
+const body = document.getElementsByTagName('body')[0];
+const timingWin = document.getElementById('timing');
+const setupWin = document.getElementById('setup');
+const noteText = document.getElementById('note');
+const secondsInput = document.getElementById('seconds');
 
-var preTimerRemaining;
-var preTimer;
+let preTimerRemaining;
+let preTimer;
 
-var actualTimeRemaining;
-var timer;
+let actualTimeRemaining;
+let timer;
 
-var noSleep = new NoSleep();
+const noSleep = new NoSleep();
 
 const MIN_PRE_TIME = 3;
 const MAX_PRE_TIME = 7;
