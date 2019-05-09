@@ -1,3 +1,6 @@
+---
+title: Visible Timer
+---
 <html>
 <head>
     <title>Visible Timer</title>
@@ -27,7 +30,7 @@
             </ul>
         </div>
 
-        <div class="version">revision: {{ site.github.build_revision }}</div>
+        <div class="version">revision: {{ site.github.build_revision | truncate: 8, "" }}</div>
     </div>
 
 <!-- https://github.com/richtr/NoSleep.js -->
