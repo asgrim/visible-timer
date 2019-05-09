@@ -10,6 +10,9 @@ var preTimer;
 var actualTimeRemaining;
 var timer;
 
+const MIN_PRE_TIME = 3;
+const MAX_PRE_TIME = 7;
+
 function timerStartedEvent()
 {
     new Audio('beep.mp3').play();
@@ -57,5 +60,9 @@ function startTimer(preTime, actualTime) {
 
 document.getElementById('go').onclick = function () {
     document.documentElement.webkitRequestFullscreen();
-    startTimer(3, parseInt(secondsInput.value));
+
+    startTimer(
+        Math.floor(Math.random() * (MAX_PRE_TIME - MIN_PRE_TIME + 1)) + MIN_PRE_TIME,
+        parseInt(secondsInput.value)
+    );
 };
