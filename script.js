@@ -13,8 +13,17 @@ let paused = false;
 
 const noSleep = new NoSleep();
 
-const MIN_PRE_TIME = 3;
-const MAX_PRE_TIME = 7;
+const MIN_PRE_TIME = 3000;
+const MAX_PRE_TIME = 7000;
+const TICK_SIZE = 100;
+
+const numberFormatter = Intl.NumberFormat(
+    'en',
+    {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1
+    }
+);
 
 function timerStartedEvent()
 {
@@ -39,7 +48,7 @@ function toggleTimer() {
     // Unpause by just restarting the timer with actual time remaining
     if (paused) {
         paused = false;
-        startTimer(3, actualTimeRemaining);
+        startTimer(3000, actualTimeRemaining);
         return;
     }
 
@@ -49,29 +58,34 @@ function toggleTimer() {
     paused = true;
 }
 
+function renderTime(timeInMs)
+{
+    noteText.innerText = numberFormatter.format(timeInMs / 1000);
+}
+
 function startTimer(preTime, actualTime) {
     setupWin.setAttribute('class', 'hidden');
     timingWin.setAttribute('class', '');
     body.setAttribute('class', 'stopped');
     preTimerRemaining = preTime;
     actualTimeRemaining = actualTime;
-    noteText.innerText = preTimerRemaining;
+    renderTime(preTimerRemaining);
     preTimer = setInterval(function () {
-        preTimerRemaining--;
-        noteText.innerText = preTimerRemaining;
+        preTimerRemaining -= TICK_SIZE;
+        renderTime(preTimerRemaining);
 
-        if (preTimerRemaining === 0) {
+        if (preTimerRemaining <= 0) {
             clearInterval(preTimer);
 
             timerStartedEvent();
 
-            noteText.innerText = actualTimeRemaining;
+            renderTime(actualTimeRemaining);
             body.setAttribute('class', 'started');
             timer = setInterval(function () {
-                actualTimeRemaining--;
-                noteText.innerText = actualTimeRemaining;
+                actualTimeRemaining -= TICK_SIZE;
+                renderTime(actualTimeRemaining);
 
-                if (actualTimeRemaining === 0) {
+                if (actualTimeRemaining <= 0) {
                     clearInterval(timer);
                     setupWin.setAttribute('class', '');
                     timingWin.setAttribute('class', 'hidden');
@@ -79,9 +93,9 @@ function startTimer(preTime, actualTime) {
 
                     timerCompletedEvent();
                 }
-            }, 1000);
+            }, TICK_SIZE);
         }
-    }, 1000);
+    }, TICK_SIZE);
 }
 
 document.getElementById('go').onclick = function () {
@@ -90,7 +104,7 @@ document.getElementById('go').onclick = function () {
 
     startTimer(
         Math.floor(Math.random() * (MAX_PRE_TIME - MIN_PRE_TIME + 1)) + MIN_PRE_TIME,
-        parseInt(secondsInput.value)
+        parseInt(secondsInput.value) * 1000
     );
 };
 document.getElementById('timing').onclick = toggleTimer;
