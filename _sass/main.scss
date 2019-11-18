@@ -31,6 +31,10 @@ body {
             animation: blinker 1s linear infinite;
             display: block;
         }
+
+        #stop-reset-button {
+            display: block !important;
+        }
     }
 }
 
@@ -42,9 +46,23 @@ div#welcome {
     }
 }
 div#timing {
-    font-size: 25.5vw;
+    height: 100%;
     #note {
         text-align: center;
+        font-size: 3vw;
+    }
+    #stop-reset-button {
+        font-size: 5vw;
+        text-align: center;
+        display: none;
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 5px;
+        color: black;
+        text-decoration: none;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 }
 div#setup {

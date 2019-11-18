@@ -8,6 +8,7 @@ const secondsInput = document.getElementById('seconds');
 let preTimerRemaining;
 let preTimer;
 
+let actualTimeSet;
 let actualTimeRemaining;
 let timer;
 let paused = false;
@@ -49,7 +50,7 @@ function toggleTimer() {
     // Unpause by just restarting the timer with actual time remaining
     if (paused) {
         paused = false;
-        startTimer(3000, actualTimeRemaining);
+        startTimer(3000, actualTimeRemaining, actualTimeSet);
         return;
     }
 
@@ -61,15 +62,29 @@ function toggleTimer() {
 
 function renderTime(timeInMs)
 {
-    noteText.innerText = numberFormatter.format(timeInMs / 1000);
+    noteText.innerHTML = numberFormatter.format(timeInMs / 1000) + ' remaining<br />'
+    + numberFormatter.format((actualTimeSet - timeInMs) / 1000) + ' elapsed<br />';
 }
 
-function startTimer(preTime, actualTime) {
+function stopAndReset() {
+    clearInterval(preTimer);
+    clearInterval(timer);
+    preTimerRemaining = 0;
+    actualTimeRemaining = 0;
+    setupWin.setAttribute('class', '');
+    timingWin.setAttribute('class', 'hidden');
+    body.setAttribute('class', 'stopped');
+    paused = false;
+    renderTime(0);
+}
+
+function startTimer(preTime, actualTime, originalActualTime) {
     setupWin.setAttribute('class', 'hidden');
     timingWin.setAttribute('class', '');
     body.setAttribute('class', 'stopped');
     preTimerRemaining = preTime;
     actualTimeRemaining = actualTime;
+    actualTimeSet = originalActualTime;
     renderTime(preTimerRemaining);
     preTimer = setInterval(function () {
         preTimerRemaining -= TICK_SIZE;
@@ -87,10 +102,7 @@ function startTimer(preTime, actualTime) {
                 renderTime(actualTimeRemaining);
 
                 if (actualTimeRemaining <= 0) {
-                    clearInterval(timer);
-                    setupWin.setAttribute('class', '');
-                    timingWin.setAttribute('class', 'hidden');
-                    body.setAttribute('class', 'stopped');
+                    stopAndReset();
 
                     timerCompletedEvent();
                 }
@@ -117,6 +129,7 @@ document.getElementById('startup').onclick = function () {
 document.getElementById('go').onclick = function () {
     startTimer(
         Math.floor(Math.random() * (MAX_PRE_TIME - MIN_PRE_TIME + 1)) + MIN_PRE_TIME,
+        parseInt(secondsInput.value) * 1000,
         parseInt(secondsInput.value) * 1000
     );
 };
