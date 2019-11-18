@@ -1,6 +1,7 @@
 const body = document.getElementsByTagName('body')[0];
 const timingWin = document.getElementById('timing');
 const setupWin = document.getElementById('setup');
+const welcomeWin = document.getElementById('welcome');
 const noteText = document.getElementById('note');
 const secondsInput = document.getElementById('seconds');
 
@@ -98,10 +99,20 @@ function startTimer(preTime, actualTime) {
     }, TICK_SIZE);
 }
 
-document.getElementById('go').onclick = function () {
+document.getElementById('startup').onclick = function () {
     noSleep.enable();
-    document.documentElement.webkitRequestFullscreen();
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen();
+    }
 
+    setupWin.setAttribute('class', '');
+    welcomeWin.setAttribute('class', 'hidden');
+};
+document.getElementById('go').onclick = function () {
     startTimer(
         Math.floor(Math.random() * (MAX_PRE_TIME - MIN_PRE_TIME + 1)) + MIN_PRE_TIME,
         parseInt(secondsInput.value) * 1000
