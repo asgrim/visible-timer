@@ -109,8 +109,10 @@ document.getElementById('startup').onclick = function () {
         document.documentElement.webkitRequestFullscreen();
     }
 
-    setupWin.setAttribute('class', '');
+    screen.orientation.lock('landscape');
+
     welcomeWin.setAttribute('class', 'hidden');
+    setupWin.setAttribute('class', '');
 };
 document.getElementById('go').onclick = function () {
     startTimer(
